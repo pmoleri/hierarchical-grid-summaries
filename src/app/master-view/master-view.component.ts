@@ -42,7 +42,7 @@ export class MasterViewComponent implements OnInit, OnDestroy {
     if (this.isSelected(summary)) {
       this.disabledSummaries = this.disabledSummaries.filter(s => s !== summary);
     } else {
-      this.disabledSummaries.push(summary);
+      this.disabledSummaries = [...this.disabledSummaries, summary];
     }
   }
 
