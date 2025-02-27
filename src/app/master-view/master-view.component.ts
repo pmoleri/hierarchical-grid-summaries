@@ -14,6 +14,10 @@ export class MasterViewComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   public northwindOrders: OrdersType[] = [];
 
+  disabledSummaries = ['count'];
+
+  uniq = 0;
+
   constructor(
     private northwindService: NorthwindService,
   ) {}
@@ -28,5 +32,21 @@ export class MasterViewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  protected isSelected(summary: string) {
+    return this.disabledSummaries.includes(summary);
+  }
+
+  protected toggle(summary: string) {
+    if (this.isSelected(summary)) {
+      this.disabledSummaries = this.disabledSummaries.filter(s => s !== summary);
+    } else {
+      this.disabledSummaries.push(summary);
+    }
+  }
+
+  protected recreate() {
+    this.uniq++;
   }
 }

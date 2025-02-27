@@ -1,44 +1,44 @@
 <div class="row-layout group">
-  <igx-buttongroup class="button-group">
-    <button igxButton igxRipple>
+  <span>Disable:</span>
+  <igx-buttongroup class="button-group" selectionMode="multi">
+    <button [selected]="isSelected('count')" igxButton (click)="toggle('count')">
       Count
     </button>
-    <button igxButton igxRipple>
+    <button [selected]="isSelected('sum')" igxButton (click)="toggle('sum')">
       Sum
     </button>
-    <button igxButton igxRipple>
+    <button [selected]="isSelected('avg')" igxButton (click)="toggle('avg')">
       Avg
     </button>
-    <button igxButton igxRipple>
+    <button [selected]="isSelected('max')" igxButton (click)="toggle('max')">
       Max
     </button>
-    <button igxButton igxRipple>
+    <button [selected]="isSelected('min')" igxButton (click)="toggle('min')">
       Min
     </button>
   </igx-buttongroup>
-  <button igxButton="contained" type="button" igxRipple class="button">
+  <button igxButton="contained" type="button" igxRipple class="button" (click)="recreate()">
     Recreate
   </button>
+  <span>
+    disabledSummaries: {{disabledSummaries.join(',')}}
+  </span>
 </div>
+@for (r of [uniq]; track r) {
 <igx-hierarchical-grid [data]="northwindOrders" primaryKey="orderID" [allowFiltering]="true" filterMode="excelStyleFilter" class="hierarchical-grid">
   <igx-row-island key="details" primaryKey="productID" [allowFiltering]="true" filterMode="excelStyleFilter">
-    <igx-column field="productID" dataType="number" header="productID" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-    <igx-column field="unitPrice" dataType="number" header="unitPrice" [filterable]="true" [hasSummary]="true" disabledSummaries="['count', 'average']" [selectable]="false"></igx-column>
-    <igx-column field="quantity" dataType="number" header="quantity" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-    <igx-column field="discount" dataType="number" header="discount" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
+    <igx-column field="productID" dataType="number" header="productID" [filterable]="true" [sortable]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
+    <igx-column field="unitPrice" dataType="number" header="unitPrice" [filterable]="true" [hasSummary]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
+    <igx-column field="quantity" dataType="number" header="quantity" [filterable]="true" [sortable]="true" [hasSummary]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
+    <igx-column field="discount" dataType="number" header="discount" [filterable]="true" [sortable]="true" [hasSummary]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
   </igx-row-island>
-  <igx-column field="orderID" dataType="number" header="orderID" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="customerID" dataType="string" header="customerID" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="employeeID" dataType="number" header="employeeID" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="orderDate" dataType="date" header="orderDate" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="requiredDate" dataType="date" header="requiredDate" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="shippedDate" dataType="date" header="shippedDate" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="shipVia" dataType="number" header="shipVia" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="freight" dataType="number" header="freight" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="shipName" dataType="string" header="shipName" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="shipAddress.street" dataType="string" header="shipAddress street" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="shipAddress.city" dataType="string" header="shipAddress city" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="shipAddress.region" dataType="string" header="shipAddress region" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="shipAddress.postalCode" dataType="string" header="shipAddress postalCode" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
-  <igx-column field="shipAddress.country" dataType="string" header="shipAddress country" [filterable]="true" [sortable]="true" [hasSummary]="true" [selectable]="false"></igx-column>
+  <igx-column field="orderID" dataType="number" header="orderID" [filterable]="true" [sortable]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
+  <igx-column field="customerID" dataType="string" header="customerID" [filterable]="true" [sortable]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
+  <igx-column field="employeeID" dataType="number" header="employeeID" [filterable]="true" [sortable]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
+  <igx-column field="orderDate" dataType="date" header="orderDate" [filterable]="true" [sortable]="true" [hasSummary]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
+  <igx-column field="requiredDate" dataType="date" header="requiredDate" [filterable]="true" [sortable]="true" [hasSummary]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
+  <igx-column field="shippedDate" dataType="date" header="shippedDate" [filterable]="true" [sortable]="true" [hasSummary]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
+  <igx-column field="shipVia" dataType="number" header="shipVia" [filterable]="true" [sortable]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
+  <igx-column field="freight" dataType="number" header="freight" [filterable]="true" [sortable]="true" [hasSummary]="true" [disabledSummaries]="disabledSummaries" [selectable]="false"></igx-column>
 </igx-hierarchical-grid>
+}
